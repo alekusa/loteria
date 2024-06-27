@@ -1,16 +1,12 @@
-import { json, Op } from 'sequelize'
+import { json } from 'sequelize'
 import User from '../models/user.model.js'
 import jwt from 'jsonwebtoken'
 import serviceEncryption from './encryption.service.js'
 const servCrypto = new serviceEncryption()
 
-export const getUsersss = () => {
-    return User.findAll()
-}
-
 class services {
     getUsers() {
-        return User.findAll()
+        return User.findAll({})
     }
     async setUser(object) {
         const newUser = User.build(object)
@@ -61,7 +57,7 @@ class services {
             return { Email: `El Email: ${email} ya existe` }
         }
     }
-    async mathPasswotd(bodyPass, bodyEmail) {
+    async mathPassword(bodyPass, bodyEmail) {
         const user = await User.findOne({ where: { Email: bodyEmail } })
         const comparePass = await servCrypto.comparePassword(
             bodyPass,
@@ -73,7 +69,7 @@ class services {
             })
             return { token }
         } else {
-            return { Password: 'Password Incorrecto', token: 'Null' }
+            return { message: 'Password Incorrecto' }
         }
     }
 }

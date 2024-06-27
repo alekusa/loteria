@@ -3,7 +3,7 @@ const serv = new services()
 
 export const getUsers = async (req, res) => {
     try {
-        res.status(200).json(await serv.getUsers())
+        res.status(200).json({ users: await serv.getUsers() })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -46,7 +46,7 @@ export const signUp = async (req, res) => {
 export const singIn = async (req, res) => {
     try {
         res.status(200).json(
-            await serv.mathPasswotd(req.body.password, req.body.email)
+            await serv.mathPassword(req.body.password, req.body.email)
         )
     } catch (error) {
         res.status(500).json({ message: error.message })

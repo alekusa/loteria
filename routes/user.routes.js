@@ -18,5 +18,6 @@ router.delete('/user/:id', [veryfyToken, isAdmin], deleteUser)
 router.get('/user/:id', [veryfyToken, isAdmin], getUser)
 router.post('/signup', signUp)
 router.post('/signin', singIn)
+router.get('/pru', getUsers)
 
 export default router
